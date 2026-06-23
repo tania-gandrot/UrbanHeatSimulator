@@ -20,3 +20,22 @@ Le projet suit la même philosophie que BestIAle :
 5. Observer les conséquences.
 
 Ce dépôt fait partie d'une démarche d'exploration des systèmes adaptatifs, de la simulation et des phénomènes émergents.
+
+V0.6
+
+Fonctionnel :
+- Carte urbaine
+- Carte thermique
+- Diffusion entre voisins
+- Cycle jour/nuit
+- Inspection des cases
+
+Problèmes connus :
+- Températures irréalistes
+- Pas d'inertie thermique
+- Pas de stockage de chaleur
+- Pas de vent
+- Conservation de l'énergie non respectée
+
+Prochaine étape :
+Refonte du moteur thermique basée sur les propriétés des matériaux plutôt que sur des bonus/malus de température.

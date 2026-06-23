@@ -56,6 +56,12 @@ canvas{
 
 </div>
 
+<div id="ambient">
+Température ambiante : --
+</div>
+
+<br>
+
 <div id="info">
 Survole une case
 </div>
@@ -88,6 +94,9 @@ heatCanvas.getContext("2d");
 const info =
 document.getElementById("info");
 
+const ambientDisplay =
+document.getElementById("ambient");
+
 // =====================
 // SURVOL
 // =====================
@@ -103,13 +112,13 @@ let grid = [];
 
 let time = 0;
 
-function createWorld(){
-
-    function getAmbientTemperature(){
+function getAmbientTemperature(){
 
     return 30 + 5 * Math.sin(time);
 
 }
+
+function createWorld(){
 
     grid = [];
 
@@ -255,6 +264,8 @@ function updateTemperature(){
             temp +=
                 (average - temp)
                 * 0.05;
+
+
 
             temp =
                 Math.max(
@@ -475,10 +486,24 @@ function(e){
         let cell =
             grid[y][x];
 
+        let ambient =
+            getAmbientTemperature();
+
         info.innerHTML = `
-            <b>Type :</b> ${cell.type}<br>
-            <b>Température :</b> ${cell.temp.toFixed(1)} °C<br>
-            <b>Coordonnées :</b> (${x},${y})
+            <b>Température ambiante :</b>
+            ${ambient.toFixed(1)} °C
+            <br><br>
+
+            <b>Type :</b>
+            ${cell.type}
+            <br>
+
+            <b>Température case :</b>
+            ${cell.temp.toFixed(1)} °C
+            <br>
+
+            <b>Coordonnées :</b>
+            (${x},${y})
         `;
     }
 });
@@ -486,6 +511,9 @@ function(e){
 // =====================
 // BOUCLE
 // =====================
+
+ambientDisplay.innerHTML =
+`Température ambiante : ${getAmbientTemperature().toFixed(1)} °C`;
 
 function loop(){
 

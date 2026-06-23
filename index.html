@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -140,38 +141,94 @@ createWorld();
 // TEMPERATURE
 // =====================
 
+
 function updateTemperature(){
 
-    for(let row of grid){
+    let newTemps = [];
 
-        for(let cell of row){
+    for(let y=0;y<SIZE;y++){
+
+        let row = [];
+
+        for(let x=0;x<SIZE;x++){
+
+            let cell = grid[y][x];
+
+            let temp = cell.temp;
+
+            // Soleil
 
             switch(cell.type){
 
                 case "tree":
-                    cell.temp -= 0.002;
+                    temp -= 0.002;
                     break;
 
                 case "water":
-                    cell.temp -= 0.004;
+                    temp -= 0.004;
                     break;
 
                 case "building":
-                    cell.temp += 0.006;
+                    temp += 0.006;
                     break;
 
                 case "concrete":
-                    cell.temp += 0.008;
+                    temp += 0.008;
                     break;
-            }
+        }
 
-            if(cell.temp < 0){
-                cell.temp = 0;
-            }
+            // Diffusion thermique
 
-            if(cell.temp > 100){
-                cell.temp = 100;
-            }
+            let neighbours = [];
+            
+            if(y > 0)
+                neighbours.push(
+                    grid[y-1][x].temp
+                );
+
+            if(y < SIZE-1)
+                neighbours.push(
+                    grid[y+1][x].temp
+                );
+
+            if(x > 0)
+                neighbours.push(
+                    grid[y][x-1].temp
+                );
+
+            if(x < SIZE-1)
+                neighbours.push(
+                    grid[y][x+1].temp
+                );
+
+            let average =
+                neighbours.reduce(
+                    (a,b)=>a+b,
+                    0
+                ) / neighbours.length;
+
+            temp +=
+                (average - temp)
+                * 0.05;
+
+            temp =
+                Math.max(
+                    0,
+                    Math.min(100,temp)
+                );
+
+            row.push(temp);
+        }
+
+        newTemps.push(row);
+    }
+
+    for(let y=0;y<SIZE;y++){
+
+        for(let x=0;x<SIZE;x++){
+
+            grid[y][x].temp =
+                newTemps[y][x];
         }
     }
 }

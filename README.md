@@ -39,3 +39,7 @@ Problèmes connus :
 
 Prochaine étape :
 Refonte du moteur thermique basée sur les propriétés des matériaux plutôt que sur des bonus/malus de température.
+
+V0.7
+
+Refonte du moteur thermique faite.

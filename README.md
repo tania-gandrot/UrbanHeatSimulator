@@ -43,3 +43,17 @@ Refonte du moteur thermique basée sur les propriétés des matériaux plutôt q
 V0.7
 
 Refonte du moteur thermique faite.
+
+VO.8
+
+REFONTE :
+
+double carte (ville + chaleur)
+température ambiante affichée
+cycle ambiant 25→35→25
+propriétés matériaux
+conductivité par matériau
+capacité thermique
+survol synchronisé
+architecture nettoyée
+plus aucun héritage des versions précédentes
